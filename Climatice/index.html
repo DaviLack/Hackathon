@@ -1,0 +1,434 @@
+<html>
+
+  <head>
+    <meta charset="UTF-8">
+    <title> Alterações Climáticas</title>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+	</head>
+  <body>
+    <div class="row">
+      <div class="col-md-6" style="width: 49%;"> 
+        <div id="regions_div" style="width: 100%; height: 500px; margin-top: 100px;"></div>
+      </div>
+        <div class="col-md-6 feature" style="margin-top: 1px; width: 50%; background-color: #404040; font-family: Tw Cen MT">
+          <h3 style="color:#ffcc00">Escolha um estado brasileiro e<br><b style="color:#ffcc00"> descubra</b>	o que esta acontecendo</h3>         
+          <h4> <b style="background-color:#ffcc00;color:#404040;font-size:1.5em"> Metamorfoses climáticas  <span id="estado"></span>:</b><h4>
+          <div id="dadosTitulos" style="overflow-y: scroll; height:620px; font-family: Tw Cen MT; color:#ffcc00"> 
+
+          </div>
+        </div>
+    </div>
+  </body>
+</html>
+
+    <script type="text/javascript" src="js/loader.js"></script>
+    <script type="text/javascript" src="js/jsapi.js"></script>
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['geochart']});
+      google.charts.setOnLoadCallback(drawRegionsMap);
+//00689D
+      dicEstados = {
+          '1' : 'do Acre',
+          '2' : 'de Alagoas',
+          '3' : 'do Amapá',
+          '4' : 'do Amazonas',
+          '5' : 'da Bahia',
+          '6' : 'do Ceará',
+          '7' : 'do Distrito Federal',
+          '8' : 'do Espirito Santo',
+          '9' : 'de Goiás',
+          '10' : 'do Maranhão',
+          '11' : 'do Mato Grosso',
+          '12' : 'do Mato Grosso do Sul',
+          '13' : 'de Minas Gerais',
+          '14' : 'do Pará',
+          '15' : 'de Paraíba',
+          '16' : 'do Paraná',
+          '17' : 'de Pernambuco',
+          '18' : 'do Piauí',
+          '19' : 'do Rio de Janeiro',
+          '20' : 'do Rio Grande do Norte',
+          '21' : 'do Rio Grande do Sul',
+          '22' : 'de Rondonia',
+          '23' : 'de Roraima',
+          '24' : 'de Santa Catarina',
+          '25' : 'de São Paulo',
+          '26' : 'de Sergipe',
+          '27' : 'de Tocantins'
+        }
+        metamorfoses = {
+		'do Amazonas': 
+          {
+            '0' : 
+            {
+              'Titulo' : 'Aumento de temperatura e seca',
+              'Imagem' : '<br/><center><img src="ibagens/amazonia.jpg"   width="300px" height="300px" /></center>',
+              'Informacoes' : '•Eventos climáticos extremos altamente inusitados já relados como a seca de 2005. <br/><br/> •Potencial aumento da seca foi quantitativamente projetado durante a fase crítica de crescimento da vegetação, por causa da elevação da temperatura e da diminuição das chuvas no verão. <br/><br/>•Nas áreas não fragmentadas da floresta amazônica o efeito direto do CO2 na fotossíntese, bem como uma regeneração florestal mais rápida, podem ter causado um aumento substancial na densidade de lianas – espécie de trepadeiras lenhosas – nas duas últimas décadas.<br/><br/>•A conversão de florestas em lavouras afeta o clima porque altera o albedo regional e o fluxo de calor latente, causando o aumento de temperatura adicional no verão em regiões importantes na Amazônia. <br/><br/>  •	Grandes perdas de biodiversidade ocorrerão com um aquecimento de 2.0°C  a 3.0°C acima dos níveis pré-industriais. •	O aumento na temperatura e a diminuição de água no solo irão levar à savanização na região leste.'
+			} 
+          },
+          'do Paraná': 
+          {
+            '0' : 
+            {
+              'Titulo' : 'Chuva excessiva e problemas na produção agrícola',
+              'Imagem' : '<br/><center><img src="ibagens/parana.jpg"   width="300px" height="300px" /></center>',
+              'Informacoes' : 'A agricultura é uma das principais atividades econômicas do Paraná, e com as mudanças climáticas ocorridas no mundo inteiro essa atividade vem enfrentando problemas cada vez maiores. Foi feito uma estimativa para o período entre 2041 e 2070 e prevê que a maior parte do Paraná terá dias mais secos e mais quentes. A temperatura pode subir até 5,7°C em algumas localidades. Os municípios do Norte do Paraná devem ser os mais afetados, devido ao clima mais seco nesta região e a destruição da vegetação nativa. Já para as regiões mais frias, como Palmas e General Carneiro, é previsto aumento de até 20% no volume pluviométrico. Curitiba poderá ter elevação de mais de 3°C, com aumento de 30% no número de dias seguidos sem chuva. O período de estiagem deve ser mais sentida em praticamente todo o estado. A previsão de dias consecutivos sem chuva indica aumento de até 46% no intervalo, indicando uma desregulagem no clima. Contudo, como o volume das precipitações permanece o mesmo, a perspectiva é de que ocorram menos chuvas, mas mais intensas. Um dado atual dessa capital é que o volume de chuvas tem um crescimento anual de 19,4 milímetros, enquanto a temperatura média aumenta 0,034 graus Celsius por ano, de acordo com dados meteorológicos do INMET/ BDMEP.'
+			  }
+          },
+          'de Santa Catarina': 
+          {
+            '0' : 
+            {
+              'Titulo' : 'Chuva excessiva e seus desastres',
+              'Imagem' : '<br/><center><img src="ibagens/sc.jpg"   width="300px" height="300px" /></center>',
+              'Informacoes' : 'Com um cenário degradante de aquecimento global, várias regiões estão sendo afetadas, entre elas está Santa Catarina que além de estar sendo afetada pela elevação da temperatura média, também está sendo atingida por um aumento da precipitação. Essa mudança, apesar de não ser tão drástica como em algumas outras regiões do país, está causando um grande problema com desastres naturais no estado. De  2002  a  2012,  foram  registradas  1.108  ocorrências  de  enxurradas,  inundações  e  deslizamentos,  o  que  corresponde  a  11%  do  total  de  ocorrências  semelhantes  no  país. Os custos  com  os  desastres  também  foram  estimados,  dividindo-se  o  valor  total  dos  danos  pelo  número de vítimas, resultando em R$4.035 por afetado, R$71.310 por desalojado e R$154.265 por desabrigado (YOUNG,  2015). Estes valores deixam claro a importância de ações preventivas para que os desastres não venham a comprometer o desenvolvimento do estado. A alguns anos atrás, nossa Santa Catarina sofria com esse excesso de chuva apenas nos anos de influência do fenômeno El nino*, porém começou a ser atingida por esse excesso até em anos sem influência do ciclone, e isso evidência que o Brasil sofre graves mudanças na estrutura climática do páis.',
+			  }
+          },
+          'do Rio Grande do Sul':
+           {
+            '0' : 
+            {
+              'Titulo' : 'Irregularidade no período de chuva',
+              'Imagem' : '<br/><center><img src="ibagens/rgs.jpg"   width="300px" height="300px" /></center>',
+              'Informacoes' : 'Num período de 8 anos, o Rio Grande do Sul está passando por eventos climáticos extremos, relacionado à falta ou excesso de chuvas, que causam vários prejuizos ao estado. Referente as estatisticas: 458 tiveram esses prejuizo com as chuvas, desses 20 registraram excesso de chuvas, 262 com falta de chuva, e 176 com ocorrência das duas variações. Nos anos sob influência do El Niño, o esperado para o Rio Grande do Sul são precipitações bem distribuídas ao longo do ano e com volumes acima da média histórica. Embora sob efeito desse fenômeno, o Estado apresentou, em 2004 e 2005, os maiores números de municípios com ocorrência de falta de chuvas, 384 e 372 respectivamente, sendo que o período sem registros de precipitação chegou a quatro meses em alguns municípios. Já o ano de 2010, também sob influência do El Niño*, foi o que apresentou a maior quantidade de municípios (135) com registro de ocorrências relacionadas ao excesso de chuvas.',
+            }
+          },
+          'do Mato Grosso do Sul':
+           {
+            '0' : 
+            {
+              'Titulo' : 'Mudanças no clima do Mato Grosso do Sul',
+              'Imagem' : '<br/><center><img src="ibagens/mgs.jpg"   width="300px" height="300px" /></center>',
+              'Informacoes' : 'Com mudanças no clima, o estado de MS enfrenta uma ocorrência de chuva maior que o normal, sendo os principais afetados os municípios da Região do Pantanal. As estatísticas são assustadoras: Municípios como Nhumirim e Miranda houve um aumento maior que 400% de mm de chuva. A altura dos rios do Mato Grosso do Sul tem aumentado conforme os anos, em alguns estados esse aumento ultrapassou o limite de alerta, o que provocou alagamentos em várias cidades que desabrigou centenas de famílias.',
+			  }
+          },
+          'do Mato Grosso':
+           {
+            '0' : 
+            {
+              'Titulo' : 'Aumento da temperatura no Mato Grosso',
+              'Imagem' : '<br/><center><img src="ibagens/mg.jpg"   width="300px" height="300px" /></center>',
+              'Informacoes' : 'O Estado do Mato Grosso, com a sua significativa extensão territorial, sua diversidade debiomas e a generosa condição de origem das águas que, do cerrado, abastecem a Amazônia e o Pantanal, com a sua importante e crescente participação na produção agropecuária e na economianacional, e ainda, com uma população empreendedora e representativa da grande diversidade étnicae cultural brasileira, estará sujeito às conseqüências do aumento da temperatura e de possíveisalterações nos regimes de chuvas, capazes de afetar as bases da sua economia e das condições devida das suas gentes.(Não está disponível nenhum dado na superfície da internet para pesquisa de estatísticas).',
+			  }
+          },
+		  'de Pernambuco':
+           {
+            '0' : 
+            {
+              'Titulo' : 'Problemas da seca em Pernanbuco',
+              'Imagem' : '<br/><center><img src="ibagens/pernambuco.jpg"   width="300px" height="300px" /></center>',
+              'Informacoes' : 'Os dados evidenciam riscos futuros. Nas projeções para o período 2041-2070, municípios sertanejos ficam sujeitos a aumentos na temperatura atual de até 3,7°, e com isso, ocorre problemas de precipitação, como longos períodos com menor estiagem e afins.',
+			  }
+          },
+		  'do Ceará':
+           {
+            '0' : 
+            {
+              'Titulo' : 'O El niño no Ceará',
+              'Imagem' : '<br/><center><img src="ibagens/ceara.jpg"   width="300px" height="300px" /></center>',
+              'Informacoes' : 'O Ceará, sofre primeiramente dos efeitos do fenômeno El niño*, que sempre mantém esse estado com chuvas em excesso. Porém, ouve um aumento de eventos extremos de precipitação, que incluem chuvas extremamente excessivas e longos períodos de dias consecutivos secos, que são os fenômenos atmosféricos demasiado assustadores para a população. No caso da chuva extrema, trouxe alagamentos, perdas agrícolas, material e humana entre outras'
+			}
+          },
+		  'de Paraíba':
+           {
+            '0' : 
+            {
+              'Titulo' : 'Desmatamento afetando o clima',
+              'Imagem' : '<br/><center><img src="ibagens/paraiba.jpg"   width="300px" height="300px" /></center>',
+              'Informacoes' : 'Entre os motivos da mudança climática brasileira, está principalmente a queima de combustíveis fósseis e o desmatamento. Nesse estado há uma grande taxa de desmatamento, em 2014 cerca de 90% da Mata Atlântica presente foi desmatada. Esses dados são extremamente preocupantes para o estado local, pois representa uma mudança significativa nas condições climáticas do ambiente. Apesar de ter essas condições, Paraiba não sofre tanto com a escasses de chuva, pois está sob influência da Massa de Ar Equatorial Atlântica*, que são correntes de Ar úmidas vindas do oceano diretamente para os estados do nordeste litorâneo, porém já foram constatados períodos de estiagem maiores, o que progressivamente irá se tornar um problema.'
+			  }
+		  },
+         'de Minas Gerais': 
+          {
+            '0' : 
+            {
+              'Titulo' : 'Efeito Estufa e a Falta de Chuva',
+              'Imagem' : '<br/><center><img src="ibagens/MinasGerais.jpg"   width="300px" height="300px" /></center>',
+              'Informacoes' : 'As mudanças climáticas provocadas pela emissões de gases do efeito estufa no estado de Minas Gerais são preocupantes, o estado conhecido por seu gado enfrenta uma grande dificuldade, algumas regiões do estado encontra grandes chuvas e outras grandes secas. Isso vem dando grandes prejuízo, tanto que até o estado já vem demonstrando preocupações.'
+				}
+			},             
+          'do Espirito Santo': 
+          {
+            '0' : 
+            {
+              'Titulo' : 'Espirito Santo o novo nordeste',
+              'Imagem' : '<br/><center><img src="ibagens/EspiritoSanto.jpeg"   width="300px" height="300px" /></center>',
+              'Informacoes' : 'As emissões de gases poluentes está afetando drasticamente o espírito santo, o estado é conhecido pela sua variabilidade de temperatura contudo o estado está passando por uma crise de chuva e sem muita umidade no ar, se tudo continuar como está o Espírito Santo mudará para um clima semi-arido (clima de seca como o nordeste). A situação já é tão grave que o estado já está “cuidando do caso”.'
+				}
+			},
+			'do Rio de Janeiro': 
+          {
+            '0' : 
+            {
+              'Titulo' : 'Aumento de chuvas',
+              'Imagem' : '<br/><center><img src="ibagens/RioDeJaneiro.jpg"   width="300px" height="300px" /></center>',
+              'Informacoes' : 'Nós últimos anos a temperatura entre o litoral de São Paulo e o rio de janeiro vem aumentando, por conta da grande massa de ar quente que sobe das grandes cidades, isso ocasiona grandes chuvas na parte central do rio, podendo criar grandes tragédias como ultimamente vem ocorrendo. '
+			  }
+            },
+			'da Bahia': 
+          {
+            '0' : 
+            {
+              'Titulo' : 'Temperatura se elevando',
+              'Imagem' : '<br/><center><img src="ibagens/Bahia.jpeg"   width="300px" height="300px" /></center>',
+              'Informacoes' : 'O estado da Bahia vem tendo temperaturas bem mais altas que o normal por causa do aquecimento global, o estado já sofre de falta d’água e seca  em algumas regiões, porém com as temperaturas aumentando 0,2° graus por ano é difícil esperar algo de bom para o futuro.'
+			  }
+            },
+			'do Piauí': 
+          {
+            '0' : 
+            {
+              'Titulo' : 'Desmatamento e a Seca',
+              'Imagem' : '<br/><center><img src="ibagens/Piaui.jpg"   width="300px" height="300px" /></center>',
+              'Informacoes' : 'O estado do Piauí está bem mais precário do que imaginamos, por causa de grandes desmatamentos e pelo aquecimento global, como resultado o estado está sofrendo um aumento de temperatura, diminuição de ritmo de chuvas, e vulnerabilidade a riscos de queimadas, pesquisas apontam que o estado já sofre o que deveria ser para 2030 .'
+			  }
+            },
+			'de São Paulo': 
+          {
+            '0' : 
+            {
+              'Titulo' : 'A antiga terra da garoa',
+              'Imagem' : '<br/><center><img src="ibagens/SãoPaulo.jpg"   width="300px" height="300px" /></center>',
+              'Informacoes' : 'Com o desenvolvimento rápido da cidade e um relevo fechado, São Paulo deixou de ser a terra da garoa. Por incrível que pareça, apenas a concentração de emissões de CO2 no ambiente paulistano não é responsável por toda nosso ar poluído no estado, há também características geográficas(relevo montanhoso) que aprisionam essas emissões de CO2 nas cidades. Atualmente, São Paulo está sob efeito de uma mudança climática brusca na região sudeste, onde Rio de Janeiro e Espírito Santo tem taxas cadas vez menores da frequencia de chuva, enquanto em São Paulo essas taxas aumentaram significativamente. Esse aumento da chuva irá causa um efeito positivo no estado, pois ajudará na redução de CO2 presente na atmosfera, já imaginou uma São Paulo sem poluição?.'
+			  }
+            },
+			'do Acre': 
+          {
+            '0' : 
+            {
+              'Titulo' : 'Estabilidade Climática',
+              'Imagem' : '<br/><center><img src="ibagens/Acre.jpg"   width="300px" height="300px" /></center>',
+              'Informacoes' : 'As características climatológicas do Estado do Acre permaneceram quase idênticas, com mudanças minúsculas (tanto para mais quanto para menos) que estão dentro dos padrões. Secas e enchentes caracterizam a sazonalidade anual e de mais longo prazo.'  
+			  }
+            },
+			'do Amapá': 
+          {
+            '0' : 
+            {
+              'Titulo' : 'Anomalias Climatológicas',
+              'Imagem' : '<br/><center><img src="ibagens/Amapa.gif"   width="300px" height="300px" /></center>',
+              'Informacoes' : 'Por se situar na região tropical, em torno da Linha do Equador, o estado do Amapá recebe durante todo o ano uma grande quantidade de energia solar, que vai lhe dar um clima quente e úmido. Caracteriza-se principalmente pelo regime de precipitação, sujeito a grandes variações sazonais no regime de precipitação. A região sofre muitas vezes anomalias nas médias climatológicas devido a eventos climáticos extremos, resultantes das variabilidades de larga escala, como por exemplo, os fenômenos El Niño e La Niña.'  
+			  }
+            },
+			'do Pará': 
+          {
+            '0' : 
+            {
+              'Titulo' : '"Centralização" das chuvas',
+              'Imagem' : '<br/><center><img src="ibagens/Para.jpg"   width="300px" height="300px" /></center>',
+              'Informacoes' : 'No período de 1961 a 1990 ele era predominantemente chuvoso, com uma média grande entre 250mm e 400mm de precipitações. Já no período de 1991 a 2010, as chuvas diminuíram (cerca de 300mm na média estadual) e ficaram mais frequentes e mais concentradas próximas à capital, Belém.'  
+			  }
+            },
+			'de Rondonia': 
+          {
+            '0' : 
+            {
+              'Titulo' : 'Chuvas Volumosas',
+              'Imagem' : '<br/><center><img src="ibagens/Rondonia.jpg"   width="300px" height="300px" /></center>',
+              'Informacoes' : 'No período de 1961 a 1990 as chuvas não eram frequentes e eram em menor quantidade (cerca de 260~300mm no estado), porém no período de 1991 a 2010 isso mudou: as chuvas eram cada vez mais frequentes e com um grau maior (cerca de 300mm). Por ter como vizinho o Amazonas, Rondonia não é afetada pelos efeitos antrópicos (ilhas de calor, indústrias e etc) no estado, e se mantém por fora das crises de seca e desertificação das regiões Norte e Nordeste do páis.'  
+			  }
+            },
+			'de Roraima': 
+          {
+            '0' : 
+            {
+              'Titulo' : 'Escassez de Chuvas',
+              'Imagem' : '<br/><center><img src="ibagens/Roraima.jpg"   width="300px" height="300px" /></center>',
+              'Informacoes' : 'No período de 1961 a 1990 as chuvas eram escassas no extremo norte do estado, o que foi mudando até o mais recente período de 1991 a 2010, onde as chuvas ficam mais escassas ao leste do estado, deixando o extremo norte, extremo sul, centro e o oeste com chuvas entre 75mm e 150mm, mesmo que ainda porém hajam pequenas áreas desertificadas. O estado hoje sofre junto com seus amigos da região Norte, pois se encontra numa mudança climática específica da zona equatorial, onde se encontram períodos mais longos de estiagem. '  
+			  }
+            },
+			'de Tocantins': 
+          {
+            '0' : 
+            {
+              'Titulo' : 'Aumento da frequência de chuvas',
+              'Imagem' : '<br/><center><img src="ibagens/Tocantins.jpg"width="300px" height="300px" /></center>',
+              'Informacoes' : 'As chuvas no período de 1961~1990 eram abundantes, chegando a 350mm no extremo sul do estado. A média era entre 250mm~300mm de chuva pelo estado, o que foi modificado pelas ações humanas no último período analisado, de 1991~2010, tendo as chuvas mais frequentes, porém em menos quantidade, em cerca de 250mm no estado inteiro.'  
+			  }
+            },
+		  'de Goiás': 
+          {
+            '0' : 
+            {
+              'Titulo' : 'A seca chegou na capital',
+              'Imagem' : '<br/><center><img src="ibagens/goias.jpg"   width="300px" height="300px" /></center>',
+              'Informacoes' : 'Nos últimos anos Goiás vem sofrendo com ondas de calor que assustaram os moradores e provocaram transtornos. Em 2014, o estado foi atingido por um intenso aumento de temperatura pela falta de chuva e baixa umidade do ar, o termómetro chegou a marcar os 40 graus em alguns pontos da cidade. Operação Verde Vivo do Corpo de Bombeiros do DF registrou em 2016 mais de 17 mil ocorrências de incêndios florestais e mais de 17 mil hectares de cerrado queimado. Os maiores índices de incêndio florestal dos últimos cinco anos. As áreas agrícolas do Distrito Federal também foram impactadas com a falta das chuvas. Em junho de 2016 foi preciso ao governo do Distrito Federal decretar situação de emer-gência agrícola. O prejuízo estimado com a redução de 70% na colheita da produção de milho foi de R$ 116 milhões. Em novembro a seca provocou o primeiro racionamento por falta de água em Brasília. Atingimos situação crítica e o pior nível dos últimos 30 anos no reservatório do Descoberto que chegou a volumes abaixo de 20% da capacidade(O consumo exagerado de água nesse estado também afeta essa baixa).'
+			} 
+          },
+		  'do Rio Grande do Norte': 
+          {
+            '0' : 
+            {
+              'Titulo' : 'Aumento da temperatura no Rio Grande do Norte',
+              'Imagem' : '<br/><center><img src="ibagens/rn.jpg"   width="300px" height="300px" width="300px" height="300px" /></center>',
+              'Informacoes' : 'O Rio Grande Do Norte, com o passar do tempo e o aquecimento global, o incremento previsto para os anos de 2040 entre 2050 podem ser de até 4 ºC graus na temperatura média. Considera-se os impactos que as atividades humanas tendem a fazer sobre a dinâmica climática global, representados principalmente pela excessiva concentração de dióxido de carbono, gás metano e óxido nitroso na atmosfera.'
+			} 
+          },
+		  'de Alagoas': 
+          {
+            '0' : 
+            {
+              'Titulo' : 'Alagoas e o desmatamento',
+              'Imagem' : '<br/><center><img src="ibagens/alagoas.jpeg"   width="300px" height="300px" width="300px" height="300px" /></center>',
+              'Informacoes' : 'Assim como a maioria dos estados nordestes brasileiros, Alagoas não fica de fora no tema de desmatamento da Mata Atlântica(um dos principais motivos da mudança climática brasileira), isso traz uma série de ocorrências referente ao clima local, onde os períodos de estiagem ficam ainda mais extensos. Assim como Paraíba, esse estado não sofre tanto com a seca nos períodos de chuva, pois sofre influência da Massa de Ar Equatorial Atlântica*, que são correntes de Ar úmidas vindas do oceano diretamente para os estados do nordeste litorâneo, porém sofre alta nos períodos de estiagem.'
+			} 
+          },
+		  'do Maranhão': 
+          {
+            '0' : 
+            {
+              'Titulo' : 'O estado "mais equatorial"',
+              'Imagem' : '<br/><center><img src="ibagens/ma.jpg"   width="300px" height="300px" width="300px" height="300px" /></center>',
+              'Informacoes' : 'Os 217 municípios do Maranhão poderão ficar, progressivamente, mais quentes e mais secos até 2070. A parte oeste do estado, por exemplo, poderá ter um aumento de mais de 5°C e uma diminuição de até 32% no volume de chuvas no período indicado. Assim como seus estados amigos do nordeste, Maranhão irá tão sofrer extensão nos períodos de estiagem. Por ser um estado equatorial e longe do litoral, está sob influência apenas da Zona de Convergência Intertropical* e da Mata Atlântica para trazer os períodos de chuvas. E com o desmatamento recente, ele passa a ser um estado extremamente seco, pois começa a depender apenas da ZCIT*.'
+			  } 
+          },
+		  'de Sergipe': 
+          {
+            '0' : 
+            {
+              'Titulo' : 'Mais calor e menos chuva',
+              'Imagem' : '<br/><center><img src="ibagens/se.jpg"   width="300px" height="300px" width="300px" height="300px" /></center>',
+              'Informacoes' : 'O Sergipe está entre um dos colaboradores de emissões de CO2 no Brasil, em 2016 contava com a emissão total de 10 milhões de toneladas de CO2, e isso fez com que houvesse uma mudança climática local. Assim como os outros estados do nordeste, Sergipe está passando por uma crise de maior período de estiagem dentre os anos anteriores. Porém, apesar de ser um grande produtor na atividade de agronegócio, este estado manteve sua área de preservação ambiental da Mata Atlântica(cerca de 20% da original por estado).'} 
+          } 
+		  
+        }
+			
+      var ultimoEstadoSelecionado = '';
+
+
+      function drawRegionsMap() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Country'],
+          ['Brazil'],
+          ['Acre'],
+          ['Alagoas'],
+          ['Amapá'],
+          ['Amazonas'],
+          ['Bahia'],
+          ['Ceará'],
+          ['Distrito Federal'],
+          ['Espirito Santo'],
+          ['Goiás'],
+          ['Maranhão'],
+          ['Mato Grosso'],
+          ['Mato Grosso do Sul'],
+          ['Minas Gerais'],
+          ['Pará'],
+          ['Paraíba'],
+          ['Paraná'],
+          ['Pernambuco'],
+          ['Piauí'],
+          ['Rio de Janeiro'],
+          ['Rio Grande do Norte'],
+          ['Rio Grande do Sul'],
+          ['Rondonia'],
+          ['Roraima'],
+          ['Santa Catarina'],
+          ['São Paulo'],
+          ['Sergipe'],
+          ['Tocantins']
+        ]);
+
+        var options = {
+           region: 'BR',
+           resolution: 'provinces',
+           datalessRegionColor: 'white',
+           defaultColor: '#ffcc00',
+           enableRegionInteractivity: true
+        };
+
+        var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+        
+        function myClickHandler(){
+          var selection = chart.getSelection();
+          var message = '';
+          for (var i = 0; i < selection.length; i++) {
+              var item = selection[i];
+              if (item.row != null && item.column != null) {
+                  message += '{' + item.row + ',column:' + item.column + '}';
+              } else if (item.row != null) {
+                  message += '' + item.row + '';
+              } else if (item.column != null) {
+                  message += '{column:' + item.column + '}';
+              }
+          }
+          if (message == '') {
+              message = ultimoEstadoSelecionado;
+          }else{
+              ultimoEstadoSelecionado = message;
+          }
+            document.getElementById("dadosTitulos").innerHTML = '';
+            for(var i = 0; i < Object.keys(metamorfoses).length; i ++){ 
+              document.getElementById("estado").innerHTML = dicEstados[message];
+              //Ponto de melhoria, percorrer o array apenas nos itens relacionados ao estado clicado/marcado. (lazy)
+              if(metamorfoses[dicEstados[message]] != undefined){
+                document.getElementById("dadosTitulos").innerHTML += 
+                '<br><center><b style="color:#ffcc00; font-size:1.8em;">' + 
+                metamorfoses[dicEstados[message]][i]['Titulo'] + 
+                '</b></center><br>' + 
+                metamorfoses[dicEstados[message]][i]['Imagem'] + 
+                '<br>' + 
+				metamorfoses[dicEstados[message]][i]['Informacoes'] + 
+				  '<br/><br/><center><b style="color:#ffcc00; font-size:1.6em;">';
+              }             
+            }
+          }
+
+          google.visualization.events.addListener(chart, 'select', myClickHandler);
+
+          chart.draw(data, options);
+
+          $('#seletorCombo').change(function(){
+            valEstado = $(this).val();
+            arraySelection = [];
+            arraySelection.push({column:null,row:Number(valEstado)});
+
+
+            function myComboHandler(option){
+              var selection = option;
+              console.log(selection);
+              var message = '';
+              for (var i = 0; i < selection.length; i++) {
+                  var item = selection[i];
+                  if (item.row != null && item.column != null) {
+                      message += '{' + item.row + ',column:' + item.column + '}';
+                  } else if (item.row != null) {
+                      message += '' + item.row + '';
+                  } else if (item.column != null) {
+                      message += '{column:' + item.column + '}';
+                  }
+              }
+              if (message == '') {
+                  message = 'nothing';
+                  return false;
+              }
+                document.getElementById("dadosTitulos").innerHTML = '';
+                for(var i = 0; i < Object.keys(metamorfoses).length;  i ++){ 
+                  document.getElementById("estado").innerHTML = dicEstados[message];
+                  document.getElementById("dadosTitulos").innerHTML += 
+                  '<br>Unidade: ' + 
+                  metamorfoses[dicEstados[message]][i]['Titulo'] + 
+                  '<br>Imagem: ' + 
+                  metamorfoses[dicEstados[message]][i]['Imagem'] + 
+                  '<br>Informacoes: ' 
+                  + metamorfoses[dicEstados[message]][i]['Informacoes'] + 
+				  '<br><center><b style="color:#ffcc00; font-size:1.6em;">';
+                }
+              }
+            
+
+            google.visualization.events.addListener(chart, 'select', myComboHandler);
+
+              chart.draw(data, options);
+
+              myComboHandler(arraySelection);
+        });
+      }
+
+
+
+    </script>
